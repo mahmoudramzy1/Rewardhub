@@ -1,0 +1,176 @@
+@import "primeicons/primeicons.css";
+@import "primereact/resources/themes/lara-light-indigo/theme.css";
+@import "primereact/resources/primereact.min.css";
+@import 'bootstrap/dist/css/bootstrap.css';
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+
+.actions-container {
+    display: flex;
+    justify-content: space-between;
+
+    flex-wrap: nowrap; /* Prevent wrapping */
+    width: 100%; /* Ensure it uses available space */
+}
+
+.actions-container .btn {
+    margin: 0;
+ /* Adjust as needed */
+    white-space: nowrap; /* Prevent text wrapping */
+}
+
+.actions-container .btn {
+    display: inline-block !important;
+    
+}
+
+.actions-container .btn {
+    flex: 1; /* Make buttons flexible */
+    max-width: 150px; /* Optional: Limit max width */
+}
+
+#root {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+    overflow: auto;
+}
+
+.data-list {
+    background-color: primaryColor;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 30px 0;
+    width: calc(100% - 2rem);
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+.data-list .btn {
+    margin: 5px;
+    white-space: nowrap;
+}
+
+.p-datatable {
+    width: 100%;
+}
+
+.p-datatable .p-datatable-thead > tr > th, 
+.p-datatable .p-datatable-tbody > tr > td {
+    padding: 0.75rem 1.5rem;
+}
+
+.p-datatable-tbody > tr > td {
+    border-right: 2px solid #ddd;
+}
+
+.p-datatable-tbody > tr > td:last-child {
+    border-right: none;
+}
+.p-datatable .p-datatable-tbody > tr > td:last-child,
+.p-datatable .p-datatable-thead > tr > th:last-child {
+    text-align: center; /* Align text to the right */
+    padding: 0; /* Remove padding */
+}
+
+/* Optional: Add some spacing to the right to prevent content from touching the edge */
+.p-datatable .p-datatable-tbody > tr > td:last-child {
+    padding-right: 0.5rem; /* Adjust spacing as needed */
+}
+/* Hide actions column on small screens */
+@media (max-width: 768px) {
+    .p-datatable .p-datatable-tbody > tr > td:last-child, 
+    .p-datatable .p-datatable-thead > tr > th:last-child {
+        display: none;
+    }
+}
+
+/* Add padding, border, and a consistent appearance for inputs */
+.dialog-input {
+    width: 100%;
+    padding: 10px; /* Adjust padding */
+    margin-bottom: 10px; /* Space between inputs */
+    border: 1px solid #ccc; /* Add border */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 16px; /* Improve readability */
+    display: flex;
+    align-items: center; /* Align icon and text */
+}
+
+/* For input container with icons */
+.input-with-icon {
+    position: relative;
+}
+.custom-dialog .dialog-content {
+    padding: 20px;
+    box-sizing: border-box; /* Adjust as needed */
+}
+
+.input-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888; /* Icon color */
+}
+
+
+.custom-dialog .p-dialog-footer {
+    padding: 0px 20px 20px 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.input-with-icon input {
+    padding-left: 30px; /* Adjust to fit the icon */
+}
+
+.custom-confirm-dialog .p-dialog-header {
+    background-color: #f8f9fa; /* Light background color for header */
+    padding: 20px; /* Padding around the header */
+    border-bottom: 1px solid #ddd; /* Separator line */
+    font-size: 18px; /* Adjust header font size */
+    font-weight: bold;
+    text-align: center; /* Center-align header text */
+}
+
+.custom-confirm-dialog .p-dialog-content {
+    padding: 20px; /* Add padding for the content area */
+    font-size: 16px; /* Adjust font size */
+    text-align: center; /* Center-align content */
+}
+
+.custom-confirm-dialog .p-dialog-footer {
+    display: flex;
+    justify-content: center; /* Center-align buttons */
+    gap: 10px; /* Add spacing between buttons */
+    padding: 15px; /* Add padding for footer area */
+    border-top: 1px solid #ddd; /* Optional: separator line at footer */
+}
