@@ -1,0 +1,41 @@
+{
+  "expo": {
+    "name": "RewardHup_App1",
+    "slug": "RewardHup_App1",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/rewardhub-high-resolution-logo__2_-removebg-preview-2.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.rewardhup.app1"
+    },
+    "android": {
+      "package": "com.rewardhup.app1",
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "permissions": []
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "runtimeVersion": {
+      "policy": "sdkVersion"
+    }
+  }
+}
