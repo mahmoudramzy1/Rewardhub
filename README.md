@@ -47,6 +47,24 @@ cd ..
 cd SuperAdmin
 npm install
 ```
+3. Run
+```bash
+cd backend
+npm run dev
+cd ..
+cd frontend
+cd Admin
+npm run dev
+cd ..
+cd Redeem-App
+npm expo start
+cd ..
+cd Reward-Hub-emp-app
+npm expo start
+cd ..
+cd SuperAdmin
+npm run dev
+```
 
 # Contributing
 1. **Fork the repository.**
