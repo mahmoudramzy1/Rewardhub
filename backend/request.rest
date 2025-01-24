@@ -1,0 +1,254 @@
+POST http://localhost:3000/admin/login
+Content-Type: application/json
+
+{
+    "username": "ahmed201",
+    "password": "Ahmed123!",
+    "role": "emp"
+}
+###
+post http://localhost:3000/admin/refresh-token
+Content-Type: application/json 
+
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzdlZTM1MWE3OTk1MDhlMmNlMWUwYTYiLCJ1c2VybmFtZSI6InNhaWZwaGFybWFjeSIsInJvbGUiOiJ0aGlyZHBhcnR5IiwiaWF0IjoxNzM2NDYwNTU5LCJleHAiOjE3MzcwNjUzNTl9.uqHGldqYO8XEIpqPDT6UfqWpanZmCzXcXzDqGiju4XY"
+}
+###
+get http://localhost:3000/thirdparty/transactions
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Nzc3ZjRhMjQ5YjI4ZmVmNmFjYzBhZmEiLCJ1c2VybmFtZSI6ImNoaWxpcyIsInJvbGUiOiJ0aGlyZHBhcnR5IiwiaWF0IjoxNzM2NTUzOTc0LCJleHAiOjE3MzY1NTU3NzR9.2j_0YM2B4hg-zbEP0KewwdJd9ERihI7yQrznd-BrE5E
+###
+post http://localhost:3000/thirdparty/redeem-offer
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Nzc3ZjRhMjQ5YjI4ZmVmNmFjYzBhZmEiLCJ1c2VybmFtZSI6ImNoaWxpcyIsInJvbGUiOiJ0aGlyZHBhcnR5IiwiaWF0IjoxNzM2NDYxMTgwLCJleHAiOjE3MzY0NjI5ODB9.RaIkjgw7eToRrwl13dLHPkhZbFWia0snYsTZzIjFMSk
+
+{
+    "code": "Nn1IIz6ngW"
+}
+###
+POST http://localhost:3000/employee-app/change-password
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Nzc5NGVmMmZkNzNmM2YyYjlkYzEzMDAiLCJ1c2VybmFtZSI6Im1vaGFtZWQiLCJuYW1lIjoibW9oYW1lZCIsInJvbGUiOiJlbXAiLCJpYXQiOjE3MzY0MjQzMTAsImV4cCI6MTczNjQyNDM0MH0.IREzzBsR1Aw1xxtkk2hy-UJ3mh_I8gAS2qbd8Kd31tA
+
+{
+    "password": "Mohamed1234!",
+    "confirmPassword": "Mohamed1234!"
+}
+###
+put http://localhost:3000/employee/update/6785ee985811622ec5171d8e
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Nzg1ZWU5ODU4MTE2MjJlYzUxNzFkOGUiLCJ1c2VybmFtZSI6ImFobWVkMjAxIiwibmFtZSI6ImFobWVkZGQiLCJyb2xlIjoiZW1wIiwiaWF0IjoxNzM3MDE5MDc2LCJleHAiOjE3MzcwMjA4NzZ9.rzRhmx4O2uoPWg_Ytu7XCK3tKBXi3x33eT4w4AuBkSQ
+
+{
+    "username": "ahmed20",
+    "firstname": "ahmed",
+    "lastname": "mohamed",
+    "email": "ahmed@gmail.com",
+    "phonenumber": "01231231232"
+
+}
+
+###
+GET http://localhost:3000/thirdparty/thirdparty
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Nzc3ZjRhMjQ5YjI4ZmVmNmFjYzBhZmEiLCJ1c2VybmFtZSI6ImNoaWxpcyIsInJvbGUiOiJ0aGlyZHBhcnR5IiwiaWF0IjoxNzM2MjYxODQyLCJleHAiOjE3MzYyNjE4NzJ9.gt_z2U4IaI0hq2rjQ0XDKnl6jjjTo3RuPRsujKA4TtU
+###
+GET http://localhost:3000/superadmin/admins
+
+###
+GET http://localhost:3000/employee
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Nzc5NTlhZmZkNzNmM2YyYjlkYzEzMDkiLCJ1c2VybmFtZSI6ImtoYWxlZDkiLCJuYW1lIjoia2hhbGVkZCIsInJvbGUiOiJlbXAiLCJpYXQiOjE3MzY3ODQzMjMsImV4cCI6MTczNjc4NjEyM30._UutTNIDpldwGcb1UYmLJg2WPslf9VkiT4Ids5nN6rY
+
+###
+
+DELETE http://localhost:3000/admin/logout
+Content-Type: application/json
+
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzY2NWVhOWEyZjBhZjUyOWFlYzI2OGEiLCJ1c2VybmFtZSI6Im1haG1vdWQiLCJuYW1lIjoibWFobW91ZCIsInJvbGUiOiJlbXAiLCJpYXQiOjE3MzUxNTAwOTIsImV4cCI6MTczNTc1NDg5Mn0.ECd4BNKZR48JlORM1j3kR_GLlHwiyAxau30KduXtlM8"
+}
+
+###
+get http://localhost:3000/api/offers
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Nzc1MzI4ZGJhNDI5OWIxNmM5YzI1OWUiLCJ1c2VybmFtZSI6ImFobWVkMjAiLCJuYW1lIjoiYWhtZWQiLCJyb2xlIjoiZW1wIiwiaWF0IjoxNzM2MTA2OTE2LCJleHAiOjE3MzYxMDY5NDZ9.GWKTqsMjMk3ZNa1Cp-hd4DtS7l7NprI1kHhqc-b285w
+
+###
+post http://localhost:3000/api/offers
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzczZTg2OTBhN2M4ZGQwYTc0NDJiOGYiLCJ1c2VybmFtZSI6Im1haG1vdWQxOTkiLCJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTczNTc3NzY0MCwiZXhwIjoxNzM1Nzc5NDQwfQ.ESQHU45lXPzTEc9mvXpvWzTXvHsffTKN_RqLJRUdkzk
+
+{
+    "title": "20% off on shoes",
+    "description": "20% off on shoes",
+    "points": 100,
+    "imageUrl": "/uploads/1735222673166-download.jpeg"
+
+}
+###
+PUT http://localhost:3000/superadmin/admin/reset/6773a2f121e0ed900e1a643d
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzZjOTAyYmU3ODk5YWQwNTg3ZjFjMjciLCJ1c2VybmFtZSI6ImlicmFoaW0iLCJuYW1lIjoiaWJyYWhpbSIsImlhdCI6MTczNTcxMTUyOSwiZXhwIjoxNzM1NzEzMzI5fQ.SOivIWYA3oMwZYz4P4WvpdrYYQMViVXIg0z-P7e38cs
+###
+PUT http://localhost:3000/superadmin/admin/edit/6773a2f121e0ed900e1a643d
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzczZTg2OTBhN2M4ZGQwYTc0NDJiOGYiLCJ1c2VybmFtZSI6Im1haG1vdWQxOTkiLCJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTczNTc3NzY0MCwiZXhwIjoxNzM1Nzc5NDQwfQ.ESQHU45lXPzTEc9mvXpvWzTXvHsffTKN_RqLJRUdkzk
+
+{
+    "username": "ibrahim19"
+}
+
+###
+PUT http://localhost:3000/employee/update/6775328dba4299b16c9c259e
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Nzc1Mjk0MDRiODE2ZmNhMzhlYTljZWIiLCJ1c2VybmFtZSI6Im1vaGFtZWRyYWYzYXQiLCJuYW1lIjoibWFobW91ZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczNTczNTUyOCwiZXhwIjoxNzM1NzM3MzI4fQ.5AeLUFyu5MT7PcZU9TzFH5j9OrDIqojkbFhJ8tSgsxE
+
+{
+    "firstname": "mohamed"
+}
+###
+
+DELETE http://localhost:3000/superadmin/admin/delete/676c902be7899ad0587f1c29
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzczZTg2OTBhN2M4ZGQwYTc0NDJiOGYiLCJ1c2VybmFtZSI6Im1haG1vdWQxOTkiLCJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTczNTcxMjc1NSwiZXhwIjoxNzM1NzE0NTU1fQ.HxLTQ-Ju9_M630S6LEhDWY9maRc_WyVn13WyxVGS69s
+###
+PUT http://localhost:3000/employee/reset/6775328dba4299b16c9c259e
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Nzc1Mjk0MDRiODE2ZmNhMzhlYTljZWIiLCJ1c2VybmFtZSI6Im1vaGFtZWRyYWYzYXQiLCJuYW1lIjoibWFobW91ZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczNTczNDE4NCwiZXhwIjoxNzM1NzM1OTg0fQ.ejGgo7u8mJ-u4D5xgvnEOT_RyArSE3JLbVQ-K7oLC6U
+###
+POST http://localhost:3000/superadmin/thirdparty
+Content-Type: multipart/form-data; boundary=boundary123
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzczZTg2OTBhN2M4ZGQwYTc0NDJiOGYiLCJ1c2VybmFtZSI6Im1haG1vdWQxOTkiLCJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTczNjQwNjg5OSwiZXhwIjoxNzM2NDA4Njk5fQ.wupPrPfibxysRgevx5v7aITfg7Z4rDyppsIFMohZ3YQ
+
+--boundary123
+Content-Disposition: form-data; name="username"
+
+panda
+--boundary123
+Content-Disposition: form-data; name="password"
+
+Panda123!
+--boundary123
+Content-Disposition: form-data; name="email"
+
+panda@gmail.com
+--boundary123
+Content-Disposition: form-data; name="phonenumber"
+
+01231132442
+--boundary123
+Content-Disposition: form-data; name="industrytype"
+
+supermarket
+--boundary123
+Content-Disposition: form-data; name="website"
+
+https://panda.com.sa/
+--boundary123
+Content-Disposition: form-data; name="image"; filename="download.png"
+Content-Type: image/jpeg
+
+< C:\Users\Lenovo\Desktop/download.png
+--boundary123--
+
+###
+get http://localhost:3000/superadmin/thirdparties
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzczZTg2OTBhN2M4ZGQwYTc0NDJiOGYiLCJ1c2VybmFtZSI6Im1haG1vdWQxOTkiLCJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTczNTkxOTUxMCwiZXhwIjoxNzM1OTIxMzEwfQ.8cIVEqziz6oMYAU_Apx13YB3S4ZvfcCtPzKQ_J30yPs
+###
+DELETE http://localhost:3000/superadmin/thirdparty/677f778346e1508702e63a82
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzczZTg2OTBhN2M4ZGQwYTc0NDJiOGYiLCJ1c2VybmFtZSI6Im1haG1vdWQxOTkiLCJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTczNjQwNjg5OSwiZXhwIjoxNzM2NDA4Njk5fQ.wupPrPfibxysRgevx5v7aITfg7Z4rDyppsIFMohZ3YQ
+###
+PUT http://localhost:3000/superadmin/thirdparty/edit/67762e84b7ac675343fa1eaa
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzczZTg2OTBhN2M4ZGQwYTc0NDJiOGYiLCJ1c2VybmFtZSI6Im1haG1vdWQxOTkiLCJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTczNjc1MTI5NiwiZXhwIjoxNzM2NzUzMDk2fQ.zvYhUwr0Y9jLAdyxe-FH1CrYrZSyJT1sdrXHz6neemU
+
+{
+    "points": 20,
+
+    "username": "seoudi",
+    "email": "seuoudi@gmail.com",
+    "password": "Seoudi123!",
+    "website": "https://seoudisupermarket.com/",
+    "phonenumber": "01231212444",
+    "industrytype": "market"
+}
+###
+put http://localhost:3000/superadmin/thirdparty/reset/67762e84b7ac675343fa1eaa
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzczZTg2OTBhN2M4ZGQwYTc0NDJiOGYiLCJ1c2VybmFtZSI6Im1haG1vdWQxOTkiLCJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTczNTkxOTUxMCwiZXhwIjoxNzM1OTIxMzEwfQ.8cIVEqziz6oMYAU_Apx13YB3S4ZvfcCtPzKQ_J30yPs
+###
+POST http://localhost:3000/employee-app/generate-qr
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Nzc5NGVmMmZkNzNmM2YyYjlkYzEzMDAiLCJ1c2VybmFtZSI6Im1vaGFtZWQiLCJuYW1lIjoibW9oYW1lZCIsInJvbGUiOiJlbXAiLCJpYXQiOjE3MzY1NTAxODQsImV4cCI6MTczNjU1MTk4NH0.rDQodBES3A_MsYJeY_bJ3jDqtn4actRNnam6M8jVtoQ
+
+###
+POST http://localhost:3000/thirdparty/scan-qr
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Nzc3ZjRhMjQ5YjI4ZmVmNmFjYzBhZmEiLCJ1c2VybmFtZSI6ImNoaWxpcyIsInJvbGUiOiJ0aGlyZHBhcnR5IiwiaWF0IjoxNzM2MzE2NzYwLCJleHAiOjE3MzYzMTg1NjB9.SGv2u-z5970pYioWLihbqhc5UnvLAsKhG2K_SBJsrdQ
+
+{
+    "QrData": "6775328dba4299b16c9c259e",
+    "thirdpartyId": "6777f4a249b28fef6acc0afa",
+    "price": 20
+}
+###
+post http://localhost:3000/employee-app/generate-code
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Nzc1MzI4ZGJhNDI5OWIxNmM5YzI1OWUiLCJ1c2VybmFtZSI6ImFobWVkMjAiLCJuYW1lIjoiYWhtZWQiLCJyb2xlIjoiZW1wIiwiaWF0IjoxNzM2MzcyNjgzLCJleHAiOjE3MzYzNzQ0ODN9.4BLsBA9O8jdHCL7SoK1-xM5Kz36iiPhM1K8xOU2ajZQ
+
+{
+    "offerId": "677ae7946bf25211f0b34eb8"
+}
+###
+post http://localhost:3000/employee-app/confirmation
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Nzc5NGVmMmZkNzNmM2YyYjlkYzEzMDAiLCJ1c2VybmFtZSI6Im1vaGFtZWQiLCJuYW1lIjoibW9oYW1lZCIsInJvbGUiOiJlbXAiLCJpYXQiOjE3MzYzMTcwNDYsImV4cCI6MTczNjMxODg0Nn0.99gOK3_qYgR6w2qvr7NGGe4qs4qtADFjEEL1zO8VQCo
+
+{
+    "transactionId": "677e1c90a20aa15930c16370",
+    "confirm": true
+}
+###
+
+get http://localhost:3000/employee/search?q=1123432112
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Nzc1Mjk0MDRiODE2ZmNhMzhlYTljZWIiLCJ1c2VybmFtZSI6Im1vaGFtZWRyYWYzYXQiLCJuYW1lIjoibW9oYW1lZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczNjAwNjI4NiwiZXhwIjoxNzM2MDA4MDg2fQ.6CBBnqpI7lr8Ik_l6No0CsjZpsK-NQrslPFanPCdFIE
+###
+get http://localhost:3000/superadmin/admin/search?q=mohamedraf3at
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzczZTg2OTBhN2M4ZGQwYTc0NDJiOGYiLCJ1c2VybmFtZSI6Im1haG1vdWQxOTkiLCJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTczNjExODA2OSwiZXhwIjoxNzM2MTE5ODY5fQ.oRzXCxDKyv6ck-5U7roBRIIuo_tRGBlfyCdmJoPJcD4
+###
+get http://localhost:3000/superadmin/thirdparty/search?q=resturant
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzczZTg2OTBhN2M4ZGQwYTc0NDJiOGYiLCJ1c2VybmFtZSI6Im1haG1vdWQxOTkiLCJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTczNjEyMDIzNSwiZXhwIjoxNzM2MTIyMDM1fQ.gW5a-saCtC-_-_OTY038WntwLjz_8b8ym7mgrJ4O3kM
+###
+get http://localhost:3000/api/offers/search?q=shoes
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzczZTg2OTBhN2M4ZGQwYTc0NDJiOGYiLCJ1c2VybmFtZSI6Im1haG1vdWQxOTkiLCJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTczNjEyMDIzNSwiZXhwIjoxNzM2MTIyMDM1fQ.gW5a-saCtC-_-_OTY038WntwLjz_8b8ym7mgrJ4O3kM
+###
+get http://localhost:3000/employee/transactions/6775328dba4299b16c9c259e
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Nzc1MzI4ZGJhNDI5OWIxNmM5YzI1OWUiLCJ1c2VybmFtZSI6ImFobWVkMjAiLCJuYW1lIjoiYWhtZWQiLCJyb2xlIjoiZW1wIiwiaWF0IjoxNzM2MjMxMTI1LCJleHAiOjE3MzYyMzI5MjV9.VZ7GOcz1W5tTI1RbusgD7zTlNnOItD8dXUQpOLstO4k
+###
+POST http://localhost:3000/api/offers
+Content-Type: multipart/form-data; boundary=boundary123
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzczZTg2OTBhN2M4ZGQwYTc0NDJiOGYiLCJ1c2VybmFtZSI6Im1haG1vdWQxOTkiLCJyb2xlIjoic3VwZXJhZG1pbiIsImlhdCI6MTczNjAzNDc3MSwiZXhwIjoxNzM2MDM2NTcxfQ.DV1XWVE71GmzpQOhm9laQumRRKQAXWhhMAin0VVGX5A
+
+--boundary123
+Content-Disposition: form-data; name="title"
+
+shoes
+--boundary123
+Content-Disposition: form-data; name="description"
+
+50% off on shoes
+--boundary123
+Content-Disposition: form-data; name="points"
+
+50
+--boundary123
+Content-Disposition: form-data; name="thirdparty"
+
+seoudi
+--boundary123
+Content-Disposition: form-data; name="image"; filename="download.jpeg"
+Content-Type: image/jpeg
+
+< C:\Users\Lenovo\Desktop\download.jpeg
+--boundary123--
+###
+post http://localhost:3000/ai/chat
+Content-Type: application/json
+
+{
+    "input": "how can i redeem my points"
+}
+###
