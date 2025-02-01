@@ -46,14 +46,29 @@ npm install
 cd ..
 cd SuperAdmin
 npm install
+```
 
-add file in backend folder called ".env"
-then generate two tokens
-write in .env file
+3. Setup Environment Variables
+```bash
+1. Navigate to the backend folder.
+
+2. Create a new file named .env in the backend directory.
+
+3. Generate two tokens (ACCESS_TOKEN_SECRET and REFRESH_TOKEN_SECRET).
+
+4. Add the following content to the .env file:
+
+---
 ACCESS_TOKEN_SECRET=[your first token]
 REFRESH_TOKEN_SECRET=[your second token]
 GROQ_API_KEY=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
-```
+---
+💡 Note:
+
+Replace [your first token] and [your second token] with your actual generated tokens.
+Do not share the .env file publicly or commit it to version control.
+To prevent accidental commits, add .env to your .gitignore file.
+```bash
 
 3. Run
 ```bash
@@ -64,14 +79,14 @@ cd frontend
 cd Admin
 npm run dev
 cd ..
-cd Redeem-App
-npm expo start
-cd ..
-cd Reward-Hub-emp-app
-npm expo start
-cd ..
 cd SuperAdmin
 npm run dev
+cd ..
+cd Redeem-App
+npm run start
+cd ..
+cd Reward-Hub-emp-app
+npm run start
 ```
 
 # Contributing
