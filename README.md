@@ -69,7 +69,6 @@ Replace [your first token] and [your second token] with your actual generated to
 Do not share the .env file publicly or commit it to version control.
 To prevent accidental commits, add .env to your .gitignore file.
 ```
-___
 
 3. Run
 ```bash
