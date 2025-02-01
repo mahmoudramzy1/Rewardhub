@@ -46,7 +46,15 @@ npm install
 cd ..
 cd SuperAdmin
 npm install
+
+add file in backend folder called ".env"
+then generate two tokens
+write in .env file
+ACCESS_TOKEN_SECRET=[your first token]
+REFRESH_TOKEN_SECRET=[your second token]
+GROQ_API_KEY=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
 ```
+
 3. Run
 ```bash
 cd backend
