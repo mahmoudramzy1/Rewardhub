@@ -58,11 +58,11 @@ npm install
 
 4. Add the following content to the .env file:
 
-````markdown
+````
 ACCESS_TOKEN_SECRET=[your first token]
 REFRESH_TOKEN_SECRET=[your second token]
 GROQ_API_KEY=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
-````markdown
+````
 💡 Note:
 
 Replace [your first token] and [your second token] with your actual generated tokens.
