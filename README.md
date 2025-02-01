@@ -58,11 +58,15 @@ npm install
 
 4. Add the following content to the .env file:
 
-````bash
-ACCESS_TOKEN_SECRET=[your first token]
-REFRESH_TOKEN_SECRET=[your second token]
-GROQ_API_KEY=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
-````
+
+<div style="border:1px solid black; padding:10px;">
+  <b>API Keys:</b>
+  <div style="border:1px solid blue; padding:5px;">
+    <p><b>ACCESS_TOKEN_SECRET:</b> [your first token]</p>
+    <p><b>REFRESH_TOKEN_SECRET:</b> [your second token]</p>
+    <p><b>GROQ_API_KEY:</b> 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</p>
+  </div>
+</div>
 💡 Note:
 
 Replace [your first token] and [your second token] with your actual generated tokens.
