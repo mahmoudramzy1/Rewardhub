@@ -84,21 +84,33 @@ cd Rewardhub
 
 #### 2️⃣ Install dependencies:
 ```bash
+# Backend
 cd backend
 npm install
 cd ..
+
+# Frontend
 cd frontend
+
+# Install Admin panel dependencies
 cd Admin
 npm install
 cd ..
+
+# Install SuperAdmin dependencies
+cd SuperAdmin
+npm install
+cd ..
+
+# Install Redeem-App dependencies
 cd Redeem-App
 npm install
 cd ..
+
+# Install Reward-Hub-emp-app dependencies
 cd Reward-Hub-emp-app
 npm install
 cd ..
-cd SuperAdmin
-npm install
 ```
 
 #### 3️⃣ Setup Environment Variables
@@ -127,19 +139,29 @@ To prevent accidental commits, add .env to your .gitignore file.
 
 ### 🎯 Running the Application
 ```bash
+# Start Backend Server
 cd backend
 npm run dev
-cd ..
-cd frontend
+
+# Start Frontend Applications
+cd ../frontend
+
+# Start Admin Panel
 cd Admin
 npm run dev
 cd ..
+
+# Start SuperAdmin Panel
 cd SuperAdmin
 npm run dev
 cd ..
+
+# Start Redeem App
 cd Redeem-App
 npm run start
 cd ..
+
+# Start Employee App
 cd Reward-Hub-emp-app
 npm run start
 ```
