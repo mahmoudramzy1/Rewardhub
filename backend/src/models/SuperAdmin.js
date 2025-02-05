@@ -10,5 +10,15 @@ const superAdminSchema = new mongoose.Schema({
 
 // Create and export the model
 const SuperAdmin = mongoose.model('SuperAdmin', superAdminSchema);
+(async () => {
+    const bcrypt = require('bcrypt');
+    const newSuperAdmin = new SuperAdmin({
+        username: 'mahmoud200',
+        email: 'mahmoud200@gmail.com',
+        password: await bcrypt.hash('SecurePass123!', 10)
+    });
+    newSuperAdmin.save();
+})();
+
 
 module.exports = SuperAdmin;

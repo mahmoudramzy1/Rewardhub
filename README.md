@@ -2,7 +2,11 @@
 
 # Overview
 
-Reward hub is a web-based platform with mobile application that help companies offer their employees competitive rewards. This project uses JS (node js, express js), css, react and more to provide an engaging and interactive user experience.
+Reward hub is a web-based platform with mobile applications that help companies reward their employees effectively and efficiently. This project uses JS (node js, express js), css, react and more to provide an engaging and interactive user experience.
+
+Organizations that use RewardHub make their employees feel special, as they gain access to exclusive offers from various vendors.
+
+Organizations can reward high-performing employees with points or grant points on special occasions, such as weddings or the birth of a child. Employees can then use these points to purchase offers from vendors.
 
 # Features
 
@@ -15,12 +19,15 @@ Reward hub is a web-based platform with mobile application that help companies o
 
 * Backend: JS (Node js, express js)
 * Frontend: React, React native
- 
+* Database: MongoDB
+* Authorization: Jwt token
+
 # Installation
 ## Prerequisites
 * Install Node.js and npm
 * Install Express.js
 * Install React
+* install Mongodb
 
 ## Steps
 
@@ -87,6 +94,12 @@ npm run start
 cd ..
 cd Reward-Hub-emp-app
 npm run start
+```
+
+### the Credentials of Super Admin
+```bash
+username: mahmoud200
+password: SecurePass123!
 ```
 
 # Contributing
