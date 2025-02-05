@@ -1,6 +1,6 @@
 # Rewardhub
 
-# Overview
+## Overview
 
 Reward hub is a web-based platform with mobile applications that help companies reward their employees effectively and efficiently. This project uses JS (node js, express js), css, react and more to provide an engaging and interactive user experience.
 
@@ -8,28 +8,27 @@ Organizations that use RewardHub make their employees feel special, as they gain
 
 Organizations can reward high-performing employees with points or grant points on special occasions, such as weddings or the birth of a child. Employees can then use these points to purchase offers from vendors.
 
-# Features
+## Features
 
-* Authentication System: Secure user login and session management.
-* Responsive Design: Optimized for use on desktop and mobile devices.
-* Reward hub: offer competitive rewards for employees.
-* Employee Account: Store employees points.
+* Enhanced Security: Implemented JWT-based authentication, role-based authorization, and encryption for Passwords.
+* Scalability: Designed to handle big volumes of users, transactions, and offers.
+* Seamless Reward Distribution: Organizations can allocate reward points to employees based on performance and milestones.
+* User-Friendly UI: Built with React.js and Tailwind CSS, ensuring an intuitive experience across web and mobile applications.
 
-# Tech Stack
+## Tech Stack
 
 * Backend: JS (Node js, express js)
 * Frontend: React, React native
 * Database: MongoDB
-* Authorization: Jwt token
 
-# Installation
-## Prerequisites
+## Installation
+### Prerequisites
 * Install Node.js and npm
 * Install Express.js
 * Install React
 * install Mongodb
 
-## Steps
+### Steps
 
 1. Clone the repository:
 ```bash
@@ -96,13 +95,13 @@ cd Reward-Hub-emp-app
 npm run start
 ```
 
-### the Credentials of Super Admin
+#### the Credentials of Super Admin
 ```bash
 username: "mahmoud200"
 password: "SecurePass123!"
 ```
 
-# Contributing
+## Contributing
 1. **Fork the repository.**
 2. **Create a new branch:**
 ```bash
@@ -114,7 +113,7 @@ git commit -m "Add feature-name"
 ```
 4. **Push to your fork and submit a pull request.**
 
-# App links
+## App links
 
 - [Demo Video](https://www.youtube.com/watch?v=WbNO3oei6IM)
 - [Presentation](https://docs.google.com/presentation/d/1G9HICe-cMydpujCcK2k9I3LErt6GkGJR/edit#slide=id.p1)
