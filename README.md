@@ -98,8 +98,8 @@ npm run start
 
 ### the Credentials of Super Admin
 ```bash
-username: mahmoud200
-password: SecurePass123!
+username: "mahmoud200"
+password: "SecurePass123!"
 ```
 
 # Contributing
