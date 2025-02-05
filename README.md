@@ -44,9 +44,9 @@ RewardHub consists of **four main applications**, each serving a distinct role w
 
 ## 🌟 Features
 
+✅ **Seamless Reward Distribution** – Enables organizations to allocate reward points based on employee performance and milestones. 
 ✅ **Enhanced Security** – Implements JWT-based authentication, role-based authorization, and password encryption.  
-✅ **Scalability** – Designed to handle large user bases, transactions, and offers seamlessly.  
-✅ **Seamless Reward Distribution** – Enables organizations to allocate reward points based on employee performance and milestones.  
+✅ **Scalability** – Designed to handle large user bases, transactions, and offers seamlessly.   
 ✅ **User-Friendly UI** – Built with **React.js** and **Tailwind CSS** for an intuitive experience across web and mobile platforms.  
 
 ---
