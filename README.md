@@ -89,7 +89,7 @@ Do not share the .env file publicly.
 To prevent accidental commits, add .env to your .gitignore file.
 
 
-#### 🎯 Running the Application
+### 🎯 Running the Application
 ```bash
 cd backend
 npm run dev
