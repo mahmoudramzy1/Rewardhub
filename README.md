@@ -6,6 +6,42 @@ Organizations using RewardHub make their employees feel valued by granting them 
 
 ---
 
+## 🏗️ System Overview
+
+RewardHub consists of **four main applications**, each serving a distinct role within the system:
+
+### 🌐 **1. Web App for Organizational Admins**
+- Used by **organizational administrators** to manage employees.
+- Features:
+  - Create and manage **employee accounts**.
+  - Assign or **deduct points** from employees based on performance and milestones.
+  - View and track **employee transactions**.
+
+### 🌐 **2. Web App for Super Admins**
+- Used by **super administrators** to manage the overall system.
+- Features:
+  - Manage **organizational admin accounts**.
+  - Manage **third-party vendor accounts**.
+  - Add and manage **offers** available for employees.
+
+### 📱 **3. Mobile App for Employees**
+- Used by employees to **redeem rewards** and manage their points.
+- Features:
+  - View **available reward points**.
+  - Browse **exclusive offers**.
+  - Check **transaction history**.
+  - View **third-party vendors** (shops, restaurants, etc.).
+  - Generate a **unique offer code** when redeeming rewards.
+
+### 📱 **4. Mobile App for Third-Party Vendors**
+- Used by shops, restaurants, and other vendors to **validate employee rewards**.
+- Features:
+  - Validate **unique offer codes** provided by employees.
+  - Deduct **reward points** from employees and credit them to their own vendor account.
+  - View and track **transaction history**.
+
+---
+
 ## 🌟 Features
 
 ✅ **Enhanced Security** – Implements JWT-based authentication, role-based authorization, and password encryption.  
