@@ -7,8 +7,6 @@ import './Dashboard.css';
 import axios from '../api/axiosInstance';
 import { Buffer } from 'buffer';
 import { jwtDecode } from 'jwt-decode';
-import { ConfirmDialog } from 'primereact/confirmdialog';
-import { confirmDialog } from 'primereact/confirmdialog';
 import { useNavigate } from 'react-router-dom';
 
 window.Buffer = Buffer;
@@ -23,6 +21,9 @@ const Dashboard = () => {
     const [errors, setErrors] = useState({});
     const [transactions, setTransactions] = useState([]);
     const [query, setQuery] = useState('');
+    const [showResetDialog, setShowResetDialog] = useState(false);
+    const [resetUser, setResetUser] = useState(null);
+    const [successMessage, setSuccessMessage] = useState('');
     // Fetch data from backend API
     useEffect(() => {
         const abortController = new AbortController(); // Create an AbortController instance
@@ -85,11 +86,11 @@ const Dashboard = () => {
 
     const handleResetPassword = async (rowData) => {
         try {
-
-                await axios.put(`/employee/reset/${rowData._id}`);
-                 // Refresh the data
-                alert('Password reset successfully!');
-            
+            await axios.put(`/employee/reset/${rowData._id}`);
+            setSuccessMessage(`Password reset successfully for ${rowData.username}!`);
+            setShowResetDialog(false);
+            // Clear success message after 5 seconds
+            setTimeout(() => setSuccessMessage(''), 5000);
         } catch (error) {
             console.error('Error resetting password:', error);
         }
@@ -97,14 +98,8 @@ const Dashboard = () => {
     };
 
     const confirmResetPassword = (rowData) => {
-         // Set the user to be reset
-        confirmDialog({
-            message: `Are you sure you want to reset the password for ${rowData.username}?`,
-            header: 'Reset Password Confirmation',
-            icon: 'pi pi-exclamation-triangle',
-            accept: () => handleResetPassword(rowData), // Call the reset handler on confirmation
-            reject: () => console.log('ok'), // Reset the state if rejected
-        });
+        setResetUser(rowData);
+        setShowResetDialog(true);
     };
 
     const handleSave = async () => {
@@ -179,344 +174,476 @@ const Dashboard = () => {
 
     const actionsTemplate = (rowData) => {
         return (
-            
-            <div className="actions-container">
-            {/* View transactions */}
-            <button
-                className="btn btn-success"
-                onClick={() => {
-                    setDialogType('view');
-                    fetchTransactions(rowData);
-                    setShowDialog(true);
-                }}
-                title="View transactions"
-            >
-                <i className="pi pi-eye"></i>
-            </button>
-        
-            {/* Edit employee */}
-            <button
-                className="btn btn-primary"
-                onClick={() => {
-                    setDialogType('edit');
-                    console.log('Editing product:', rowData);
-                    setSelectedProduct(rowData);
-                    setShowDialog(true);
-                }}
-                title="Edit employee"
-            >
-                <i className="pi pi-file-edit"></i>
-            </button>
-        
-            {/* Delete employee */}
-            <button
-                className="btn btn-danger"
-                onClick={() => {
-                    setDialogType('delete');
-                    setSelectedProduct(rowData);
-                    setShowDialog(true);
-                }}
-                title="Delete employee"
-            >
-                <i className="pi pi-trash"></i>
-            </button>
-        
-            {/* Reset password */}
-            <button
-                className="btn btn-warning"
-                onClick={() => confirmResetPassword(rowData)}
-                title="Reset password"
-            >
-                <i className="pi pi-refresh"></i>
-            </button>
-        </div>
+            <div className="flex gap-2 justify-center">
+                <button
+                    onClick={() => {
+                        setDialogType('view');
+                        fetchTransactions(rowData);
+                        setShowDialog(true);
+                    }}
+                    className="flex items-center justify-center w-8 h-8 bg-blue-100 hover:bg-blue-200 text-blue-600 rounded-lg transition-all duration-200"
+                    title="View transactions"
+                >
+                    <i className="pi pi-eye text-sm"></i>
+                </button>
+                <button
+                    onClick={() => {
+                        setDialogType('edit');
+                        setSelectedProduct(rowData);
+                        setShowDialog(true);
+                    }}
+                    className="flex items-center justify-center w-8 h-8 bg-green-100 hover:bg-green-200 text-green-600 rounded-lg transition-all duration-200"
+                    title="Edit employee"
+                >
+                    <i className="pi pi-file-edit text-sm"></i>
+                </button>
+                <button
+                    onClick={() => {
+                        setDialogType('delete');
+                        setSelectedProduct(rowData);
+                        setShowDialog(true);
+                    }}
+                    className="flex items-center justify-center w-8 h-8 bg-red-100 hover:bg-red-200 text-red-600 rounded-lg transition-all duration-200"
+                    title="Delete employee"
+                >
+                    <i className="pi pi-trash text-sm"></i>
+                </button>
+                <button
+                    onClick={() => confirmResetPassword(rowData)}
+                    className="flex items-center justify-center w-8 h-8 bg-orange-100 hover:bg-orange-200 text-orange-600 rounded-lg transition-all duration-200"
+                    title="Reset password"
+                >
+                    <i className="pi pi-refresh text-sm"></i>
+                </button>
+            </div>
         );
     };
-    const confirmLogout = () => {
-        confirmDialog({
-            message: 'Are you sure you want to log out?',
-            header: 'Logout Confirmation',
-            icon: 'pi pi-exclamation-triangle',
-            accept: handleLogout, // Call handleLogout on confirmation
-            reject: () => console.log('Logout cancelled'), // Optional: handle rejection
-        });
-    };
+    
     return (
-        <div className="min-h-screen bg-primaryColor w-full py-2 px-4 rounded-lg">
-        <div className="max-w-4xl mx-auto py-6 text-textColor flex items-center justify-center flex-col">
-        <div className="w-[70%] flex items-center justify-center pr-20">
-            <img
-                src="/rewardhub-high-resolution-logo__2_-removebg-preview-2.png"
-                alt="logo"
-                className="w-[100%]"
-            />
-        </div>
-        <div className="dashboard text-center p-4">
-            <h1 className="text-3xl font-bold text-center mb-4 text-TextColor">Manage employees</h1>
-            <div className="flex justify-between items-center mb-6">
-                {/* Home Button */}
-                <button
-                    onClick={() => navigate('/change-password')}
-                    className="bg-btnColor text-white px-4 py-2 rounded-lg hover:bg-[#0c7810] transition-all duration-300"
-                >
-                    Change password
-                </button>
-
-                {/* Logout Button */}
-                <button className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-all duration-300" onClick={confirmLogout}>
-                    Logout <i className="pi pi-sign-out"></i>
-                </button>
-            </div>
-
-            {/* Confirm Dialog */}
-            <ConfirmDialog
-                style={{
-                    width: '50%', // Set consistent width
-                    borderRadius: '8px', // Rounded corners
-                }}
-                className="custom-confirm-dialog"
-            />
-            <div className="data-list">
-                <div className="add-user">
-                    <button
-                        className="btn btn-success mb-3"
-                        onClick={() => {
-                            setDialogType('add');
-                            setSelectedProduct(null);
-                            setShowDialog(true);
-                        }}
-                    >
-                        Add New Employee <i className="pi pi-plus"></i>
-                    </button>
+        <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+            {/* Header Section */}
+            <div className="bg-white shadow-lg border-b border-gray-200">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+                    <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <div>
+                            <h1 className="text-2xl font-bold text-gray-900">Employee Management</h1>
+                            <p className="text-sm text-gray-600">Manage employee accounts and transactions</p>
+                        </div>
+                        <button
+                            onClick={handleLogout}
+                            className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg"
+                        >
+                            <i className="pi pi-sign-out"></i>
+                            Logout
+                        </button>
+                    </div>
                 </div>
-                <div>
-
-            <form onSubmit={handleSearch} style={{ marginBottom: '20px' }}>
-                <input
-                    type="text"
-                    value={query}
-                    onChange={handleInputChange}
-                    placeholder="Search for employee..."
-                    style={{
-                        padding: '8px',
-                        width: '300px',
-                        marginRight: '10px',
-                        border: '1px solid #ccc',
-                        borderRadius: '8px',
-                        height: '39px',
-                    }}
-                />
-                <button
-                    className="btn btn-success mb-3"
-                >
-                    Search
-                </button>
-            </form>
-        </div>
-                {loading ? (
-                    <p>Loading...</p>
-                ) : (
-                    
-                    <DataTable value={products} responsiveLayout="scroll">
-                        <Column className="p-2" field="username" header="Username"></Column>
-                        <Column field="firstname" header="First name"></Column>
-                        <Column field="lastname" header="Last name"></Column>
-                        <Column field="email" header="Email"></Column>
-                        <Column field="phonenumber" header="Phone Number"></Column>
-                        <Column field="department" header="Department"></Column>
-                        <Column field="points" header="Points"></Column>
-                        <Column
-                            header="Actions"
-                            body={(rowData) => actionsTemplate(rowData)}
-                            className="action-column"
-                            headerStyle={{textAlign: 'center',
-                                paddingLeft: '3em',
-                            }}
-                            style={{
-                               
-                                width: '11em'
-                             }}
-                        ></Column>
-                    </DataTable>
-                    
-                )}
             </div>
-</div>
-</div>
+
+            {/* Main Content */}
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                {/* Success Message */}
+                {successMessage && (
+                    <div className="mb-6 bg-green-50 border border-green-200 rounded-lg p-4 flex items-center gap-3">
+                        <i className="pi pi-check-circle text-green-600 text-lg"></i>
+                        <span className="text-green-800 font-medium">{successMessage}</span>
+                    </div>
+                )}
+
+                {/* Actions Section */}
+                <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8">
+                    <div className="flex flex-col sm:flex-row gap-4 items-center justify-between">
+                        <button
+                            onClick={() => {
+                                setDialogType('add');
+                                setSelectedProduct(null);
+                                setShowDialog(true);
+                            }}
+                            className="flex items-center gap-2 bg-primaryColor hover:bg-green-600 text-white px-6 py-3 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg font-medium"
+                        >
+                            <i className="pi pi-plus"></i>
+                            Add New Employee
+                        </button>
+                        
+                        <form onSubmit={handleSearch} className="flex gap-3">
+                            <div className="relative">
+                                <i className="pi pi-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                                <input
+                                    type="text"
+                                    value={query}
+                                    onChange={handleInputChange}
+                                    placeholder="Search for employee..."
+                                    className="pl-10 pr-4 py-3 w-80 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primaryColor focus:border-transparent transition-all duration-200"
+                                />
+                            </div>
+                            <button
+                                type="submit"
+                                className="bg-gray-600 hover:bg-gray-700 text-white px-6 py-3 rounded-lg transition-all duration-200 font-medium"
+                            >
+                                Search
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                {/* Data Table Section */}
+                <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                    {loading ? (
+                        <div className="flex items-center justify-center py-12">
+                            <div className="flex items-center gap-3">
+                                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primaryColor"></div>
+                                <span className="text-gray-600">Loading...</span>
+                            </div>
+                        </div>
+                    ) : (
+                        <DataTable 
+                            value={products} 
+                            responsiveLayout="scroll" 
+                            className="modern-datatable"
+                            paginator 
+                            rows={10}
+                            stripedRows
+                        >
+                            <Column 
+                                field="username" 
+                                header="Username"
+                                className="font-medium"
+                            />
+                            <Column 
+                                field="firstname" 
+                                header="First Name"
+                            />
+                            <Column 
+                                field="lastname" 
+                                header="Last Name"
+                            />
+                            <Column 
+                                field="email" 
+                                header="Email"
+                            />
+                            <Column 
+                                field="phonenumber" 
+                                header="Phone Number"
+                            />
+                            <Column 
+                                field="department" 
+                                header="Department"
+                            />
+                            <Column 
+                                field="points" 
+                                header="Points"
+                            />
+                            <Column
+                                header="Actions"
+                                body={(rowData) => actionsTemplate(rowData)}
+                                className="action-column"
+                                headerStyle={{
+                                    textAlign: 'center',
+                                    width: '180px'
+                                }}
+                                style={{ width: '180px' }}
+                            />
+                        </DataTable>
+                    )}
+                </div>
+            </div>
             {/* Dialog Component */}
             <Dialog
-                className="custom-dialog"
-                header={dialogType === 'add' ? 'Add Employee' : dialogType === 'edit' ? 'Edit Employee' : dialogType === 'delete' ? 'Confirm Delete' : 'View Transactions'}
+                className="modern-dialog"
+                header={
+                    <div className="flex items-center gap-2 p-4">
+                        <i className={`pi ${
+                            dialogType === 'add' ? 'pi-plus text-green-600' :
+                            dialogType === 'edit' ? 'pi-edit text-green-600' : 
+                            dialogType === 'delete' ? 'pi-trash text-red-600' : 
+                            'pi-eye text-blue-600'
+                        }`}></i>
+                        <span>
+                            {dialogType === 'add' ? 'Add Employee' :
+                             dialogType === 'edit' ? 'Edit Employee' : 
+                             dialogType === 'delete' ? 'Confirm Delete' : 
+                             'View Transactions'}
+                        </span>
+                    </div>
+                }
                 visible={showDialog}
-                style={{ width: '50%' }}
-                headerStyle={{  
-                    padding: '15px 20px', // Add padding directly to the header
-                    backgroundColor: '#f5f5f5', // Optional: light background
-                    borderBottom: '1px solid #ddd', // Optional: border at the bottom
-                    fontSize: '18px', // Optional: font size
-                    fontWeight: 'bold', // Optional: make text bold
-                    textAlign: 'center', 
-                }}
+                style={{ width: '90%', maxWidth: '600px' }}
                 onHide={() => setShowDialog(false)}
                 footer={
-                    dialogType === 'delete' ? (
-                        <>
-                            <Button label="No" icon="pi pi-times" onClick={() => setShowDialog(false)} />
-                            <Button label="Yes" icon="pi pi-check" onClick={handleDelete} />
-                        </>
-                    ) : dialogType === 'edit' || dialogType === 'add' ? (
-                        <>
-                            <Button label="Cancel" icon="pi pi-times" onClick={() => setShowDialog(false)} />
-                            <Button label="Save" icon="pi pi-check" onClick={handleSave} />
-                        </>
-                    ) : null
+                    <div className="flex gap-3 justify-end pt-4 border-t border-gray-200 p-4">
+                        {dialogType === 'delete' ? (
+                            <>
+                                <Button 
+                                    label="Cancel" 
+                                    icon="pi pi-times" 
+                                    onClick={() => setShowDialog(false)}
+                                    className="p-button-outlined p-button-secondary  py-2 px-3 rounded-lg hover:shadow-md transition-all duration-200"
+                                    style={{
+                                        borderColor: '#6b7280',
+                                        color: '#6b7280'
+                                    }}
+                                />
+                                <Button 
+                                    label="Delete Employee" 
+                                    icon="pi pi-trash" 
+                                    onClick={handleDelete}
+                                    className="p-button-danger hover:shadow-md  py-2 px-3 rounded-lg transition-all duration-200"
+                                    style={{
+                                        background: 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)',
+                                        border: 'none'
+                                    }}
+                                />
+                            </>
+                        ) : (dialogType === 'edit' || dialogType === 'add') ? (
+                            <>
+                                <Button 
+                                    label="Cancel" 
+                                    icon="pi pi-times" 
+                                    onClick={() => setShowDialog(false)}
+                                    className="p-button-outlined p-button-secondary hover:shadow-md  py-2 px-3 rounded-lg transition-all duration-200"
+                                    style={{
+                                        borderColor: '#6b7280',
+                                        color: '#6b7280'
+                                    }}
+                                />
+                                <Button 
+                                    label="Save Changes" 
+                                    icon="pi pi-check" 
+                                    onClick={handleSave}
+                                    className="hover:shadow-md transition-all duration-200  py-2 px-3 rounded-lg"
+                                    style={{
+                                        background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+                                        border: 'none',
+                                        color: 'white'
+                                    }}
+                                />
+                            </>
+                        ) : null}
+                    </div>
                 }
->
-    <div className="dialog-content">
-        {dialogType === 'delete' ? (
-            <p>Are you sure you want to delete this employee?</p>
-        ) : dialogType === 'view' ? (
-            <div>
-            <table border="1" style={{ width: '100%', textAlign: 'left', marginTop: '20px' }}>
-                <thead>
-                    <tr>
-                        <th>Partner</th>
-                        <th>Employee</th>
-                        <th>Points</th>
-                        <th>Type</th>
-                        <th>Date</th>
-                        <th>Time</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {transactions.map((transaction) => {
-                        const { formattedDate, formattedTime } = formatDate(transaction.date);
-                        return (
-                        <tr key={transaction._id}>
-                            <td>{transaction.thirdParty || 'N/A'}</td> {/* Rename "thirdParty" to "Partner" */}
-                            <td>{transaction.employee}</td>
-                            <td>{transaction.points}</td>
-                            <td>{transaction.type}</td>
-                            <td>{formattedDate}</td>
-                            <td>{formattedTime}</td>
-                        </tr>
-                        );
-                    })}
-                </tbody>
-            </table>
-        </div>
-        ) : (
-                <div>
-                <label>User name:</label>
-                <div className="input-with-icon">
-                    <i className="pi pi-user input-icon"></i>
-                    <input
-                        type="text"
-                        className="dialog-input"
-                        required
-                        value={selectedProduct?.username || ''}
-                        onChange={(e) =>
-                            setSelectedProduct((prev) => ({ ...prev, username: e.target.value }))
-                        }
-                    />
-                    
-                </div>
-             
-                {errors.username && <p className="text-red-500 text-sm w-[150px] break-words mt-1">{errors.username}</p>}
-                
-                <label>First name:</label>
-                <div className="input-with-icon">
-                    <i className="pi pi-user input-icon"></i>
-                    <input
-                        type="text"
-                        className="dialog-input"
-                        required
-                        value={selectedProduct?.firstname || ''}
-                        onChange={(e) =>
-                            setSelectedProduct((prev) => ({ ...prev, firstname: e.target.value }))
-                        }
-                    />
-                    
-                </div>
-                {errors.firstname && <p className="text-red-500 text-sm w-[150px] break-words mt-1">{errors.firstname}</p>}
+            >
+                <div className="space-y-4 p-4">
+                    {dialogType === 'delete' ? (
+                        <div className="text-center py-6">
+                            <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-red-100 mb-4">
+                                <i className="pi pi-exclamation-triangle text-red-600 text-2xl"></i>
+                            </div>
+                            <h3 className="text-lg font-semibold text-gray-900 mb-2">Delete Employee Account</h3>
+                            <p className="text-gray-600 mb-4">
+                                Are you sure you want to delete <strong>{selectedProduct?.username}</strong>?
+                            </p>
+                            <div className="bg-red-50 border border-red-200 rounded-lg p-3">
+                                <p className="text-sm text-red-800">
+                                    <i className="pi pi-info-circle mr-2"></i>
+                                    This action cannot be undone. All data associated with this employee will be permanently removed.
+                                </p>
+                            </div>
+                        </div>
+                    ) : dialogType === 'view' ? (
+                        <div className="overflow-x-auto  ">
+                            <DataTable 
+                                value={transactions} 
+                                className="modern-datatable"
+                                paginator 
+                                rows={5}
+                                stripedRows
+                                emptyMessage="No transactions found"
+                            >
+                                <Column field="thirdParty" header="Partner" />
+                                <Column field="employee" header="Employee" />
+                                <Column field="points" header="Points" />
+                                <Column field="type" header="Type" />
+                                <Column 
+                                    field="date" 
+                                    header="Date" 
+                                    body={(rowData) => formatDate(rowData.date).formattedDate}
+                                />
+                                <Column 
+                                    field="date" 
+                                    header="Time" 
+                                    body={(rowData) => formatDate(rowData.date).formattedTime}
+                                />
+                            </DataTable>
+                        </div>
+                    ) : (
+                        <div className="space-y-4">
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">Username <span className="text-red-500">*</span></label>
+                                <div className="relative">
+                                    <i className="pi pi-user absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                                    <input
+                                        type="text"
+                                        className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primaryColor focus:border-transparent"
+                                        required
+                                        value={selectedProduct?.username || ''}
+                                        onChange={(e) =>
+                                            setSelectedProduct((prev) => ({ ...prev, username: e.target.value }))
+                                        }
+                                    />
+                                </div>
+                                {errors.username && <p className="text-red-500 text-sm mt-1">{errors.username}</p>}
+                            </div>
+                            
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700 mb-1">First Name <span className="text-red-500">*</span></label>
+                                    <div className="relative">
+                                        <i className="pi pi-user absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                                        <input
+                                            type="text"
+                                            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primaryColor focus:border-transparent"
+                                            required
+                                            value={selectedProduct?.firstname || ''}
+                                            onChange={(e) =>
+                                                setSelectedProduct((prev) => ({ ...prev, firstname: e.target.value }))
+                                            }
+                                        />
+                                    </div>
+                                    {errors.firstname && <p className="text-red-500 text-sm mt-1">{errors.firstname}</p>}
+                                </div>
+                                
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700 mb-1">Last Name <span className="text-red-500">*</span></label>
+                                    <div className="relative">
+                                        <i className="pi pi-user absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                                        <input
+                                            type="text"
+                                            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primaryColor focus:border-transparent"
+                                            required
+                                            value={selectedProduct?.lastname || ''}
+                                            onChange={(e) =>
+                                                setSelectedProduct((prev) => ({ ...prev, lastname: e.target.value }))
+                                            }
+                                        />
+                                    </div>
+                                    {errors.lastname && <p className="text-red-500 text-sm mt-1">{errors.lastname}</p>}
+                                </div>
+                            </div>
 
-                <label>Last name:</label>
-                <div className="input-with-icon">
-                    <i className="pi pi-user input-icon"></i>
-                    <input
-                        type="text"
-                        className="dialog-input"
-                        required
-                        value={selectedProduct?.lastname || ''}
-                        onChange={(e) =>
-                            setSelectedProduct((prev) => ({ ...prev, lastname: e.target.value }))
-                        }
-                    />
-                    
-                </div>
-             
-                {errors.lastname && <p className="text-red-500 text-sm w-[150px] break-words mt-1">{errors.lastname}</p>}
-                <label>Email:</label>
-                <div className="input-with-icon">
-                    <i className="pi pi-envelope input-icon"></i>
-                    <input
-                        type="email"
-                        className="dialog-input"
-                        required
-                        value={selectedProduct?.email || ''}
-                        onChange={(e) =>
-                            setSelectedProduct((prev) => ({ ...prev, email: e.target.value }))
-                        }
-                    />
-                </div>
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">Email <span className="text-red-500">*</span></label>
+                                <div className="relative">
+                                    <i className="pi pi-envelope absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                                    <input
+                                        type="email"
+                                        className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primaryColor focus:border-transparent"
+                                        required
+                                        value={selectedProduct?.email || ''}
+                                        onChange={(e) =>
+                                            setSelectedProduct((prev) => ({ ...prev, email: e.target.value }))
+                                        }
+                                    />
+                                </div>
+                                {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
+                            </div>
 
-                {errors.email && <p className="text-red-500 text-sm w-[150px] break-words mt-1">{errors.email}</p>}
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700 mb-1">Phone Number <span className="text-red-500">*</span></label>
+                                    <div className="relative">
+                                        <i className="pi pi-phone absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                                        <input
+                                            type="tel"
+                                            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primaryColor focus:border-transparent"
+                                            required
+                                            value={selectedProduct?.phonenumber || ''}
+                                            onChange={(e) =>
+                                                setSelectedProduct((prev) => ({ ...prev, phonenumber: e.target.value }))
+                                            }
+                                        />
+                                    </div>
+                                    {errors.phonenumber && <p className="text-red-500 text-sm mt-1">{errors.phonenumber}</p>}
+                                </div>
+                                
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700 mb-1">Department</label>
+                                    <div className="relative">
+                                        <i className="pi pi-sitemap absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                                        <input
+                                            type="text"
+                                            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primaryColor focus:border-transparent"
+                                            value={selectedProduct?.department || ''}
+                                            onChange={(e) =>
+                                                setSelectedProduct((prev) => ({ ...prev, department: e.target.value }))
+                                            }
+                                        />
+                                    </div>
+                                </div>
+                            </div>
 
-                <label>Phone Number:</label>
-                <div className="input-with-icon">
-                    <i className="pi pi-phone input-icon"></i>
-                    <input
-                        type="phonenumber"
-                        className="dialog-input"
-                        required
-                        value={selectedProduct?.phonenumber || ''}
-                        onChange={(e) =>
-                            setSelectedProduct((prev) => ({ ...prev, phonenumber: e.target.value }))
-                        }
-                    />
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">Points</label>
+                                <div className="relative">
+                                    <i className="pi pi-star absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                                    <input
+                                        type="number"
+                                        className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primaryColor focus:border-transparent"
+                                        value={selectedProduct?.points || ''}
+                                        onChange={(e) =>
+                                            setSelectedProduct((prev) => ({ ...prev, points: e.target.value }))
+                                        }
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    )}
                 </div>
+            </Dialog>
 
-                {errors.phonenumber && <p className="text-red-500 text-sm w-[150px] break-words mt-1">{errors.phonenumber}</p>}
-
-                <label>Department:</label>
-                <div className="input-with-icon">
-                    <i className="pi pi-sitemap input-icon"></i>
-                    <input
-                        type="text"
-                        className="dialog-input"
-                        value={selectedProduct?.department || ''}
-                        onChange={(e) =>
-                            setSelectedProduct((prev) => ({ ...prev, department: e.target.value }))
-                        }
-                    />
+            {/* Reset Password Confirmation Dialog */}
+            <Dialog
+                className="modern-dialog"
+                header={
+                    <div className="p-4 flex items-center gap-2">
+                        <i className="pi pi-refresh text-orange-600"></i>
+                        <span className="font-semibold">Reset Password Confirmation</span>
+                    </div>
+                }
+                visible={showResetDialog}
+                style={{ width: '90%', maxWidth: '400px' }}
+                onHide={() => setShowResetDialog(false)}
+                footer={
+                    <div className="p-4 flex gap-3 justify-end pt-4 border-t border-gray-200">
+                        <Button 
+                            label="Cancel" 
+                            icon="pi pi-times" 
+                            onClick={() => setShowResetDialog(false)}
+                            className="p-button-outlined p-button-secondary  py-2 px-3 rounded-lg hover:shadow-md transition-all duration-200"
+                            style={{
+                                borderColor: '#6b7280',
+                                color: '#6b7280'
+                            }}
+                        />
+                        <Button 
+                            label="Reset Password" 
+                            icon="pi pi-refresh" 
+                            onClick={() => handleResetPassword(resetUser)}
+                            className="hover:shadow-md transition-all duration-200 py-2 px-3 rounded-lg"
+                            style={{
+                                background: 'linear-gradient(135deg, #f97316 0%, #ea580c 100%)',
+                                border: 'none',
+                                color: 'white'
+                            }}
+                        />
+                    </div>
+                }
+            >
+                <div className="text-center py-6">
+                    <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-orange-100 mb-4">
+                        <i className="pi pi-refresh text-orange-600 text-2xl"></i>
+                    </div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2">Reset Password</h3>
+                    <p className="text-gray-600 mb-4">
+                        Are you sure you want to reset the password for <strong>{resetUser?.username}</strong>?
+                    </p>
+                    <div className="bg-orange-50 border border-orange-200 rounded-lg p-3">
+                        <p className="text-sm text-orange-800">
+                            <i className="pi pi-info-circle mr-2"></i>
+                            A new password will be generated and the employee will need to use it for their next login.
+                        </p>
+                    </div>
                 </div>
-
-                <label>Points:</label>
-                <div className="input-with-icon">
-                    <i className="pi pi-star input-icon"></i>
-                    <input
-                        type="number"
-                        className="dialog-input"
-                        value={selectedProduct?.points || ''}
-                        onChange={(e) =>
-                            setSelectedProduct((prev) => ({ ...prev, points: e.target.value }))
-                        }
-                    />
-                </div>
-            </div>
-        )}
-    </div>
-</Dialog>
+            </Dialog>
         </div>
     );
 };

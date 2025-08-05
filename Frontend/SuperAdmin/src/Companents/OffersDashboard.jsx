@@ -94,162 +94,270 @@ const OffersDashboard = () => {
         }
     };
 return (
-    <div className="min-h-screen bg-primaryColor h-full w-full py-2 px-4 rounded-lg">
-        <div className="max-w-4xl mx-auto py-6 text-textColor flex items-center justify-center flex-col">
-            <div className="w-[70%] flex items-center justify-center pr-20">
-            <img
-                src="/public/pixelcut-export (1).png"
-                alt="logo"
-                className="w-[100%]"
-            />
-            </div>
-            <div className="w-full">
-                <h1 className="text-2xl font-bold text-center mb-4 text-TextColor">Manage Offers</h1>
-                    <div className="flex justify-center items-center mb-6">
-                        <button
-                            onClick={() => navigate("/")}
-                            className="bg-btnColor hover:bg-btnColorHover text-white py-2 px-4 rounded duration-75"
-                        >
-                            Go to Home
-                        </button>
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+        {/* Header Section */}
+        <div className="bg-white shadow-lg border-b border-gray-200">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+                <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div>
+                        <h1 className="text-2xl font-bold text-gray-900">Offer Management</h1>
+                        <p className="text-sm text-gray-600">Create and manage promotional offers</p>
                     </div>
-            <form onSubmit={handleSubmit} className="mb-6">
-                <div className="mb-4">
-                <label className="block text-TextColor mb-2">Title</label>
-                <input
-                    type="text"
-                    name="title"
-                    value={form.title}
-                    onChange={handleChange}
-                    className="w-full px-3 py-2 border rounded text-textInput"
-                    required
-                />
-                </div>
-
-                <div className="mb-4">
-                <label className="block text-TextColor mb-2">Description</label>
-                <textarea
-                    name="description"
-                    value={form.description}
-                    onChange={handleChange}
-                    className="w-full px-3 py-2 border rounded text-textInput"
-                    required
-                ></textarea>
-                </div>
-
-                <div className="mb-4">
-                <label className="block text-TextColor mb-2">Market Name</label>
-                <input
-                    type="text"
-                    name="thirdparty"
-                    value={form.thirdparty}
-                    onChange={handleChange}
-                    className="w-full px-3 py-2 border rounded text-textInput"
-                    required
-                />
-                </div>
-
-                <div className="mb-4">
-                <label className="block text-TextColor mb-2">Image</label>
-                <div
-                    className="w-full px-3 py-2 border rounded bg-gray-50 text-center cursor-pointer"
-                    onDrop={handleImageDrop}
-                    onDragOver={handleDragOver}
-                >
-                    <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleImageUpload}
-                    className="hidden text-textInput"
-                    id="imageInput"
-                    />
-                    <label htmlFor="imageInput" className="cursor-pointer text-textInput">
-                    {form.image ? form.image.name : "Click to upload or drag and drop an image here"}
-                    </label>
-                </div>
-                </div>
-
-                <div className="mb-4">
-                <label className="block text-TextColor mb-2">Point (Optional)</label>
-                <input
-                    type="number"
-                    name="points"
-                    value={form.points}
-                    onChange={handleChange}
-                    className="w-full px-3 py-2 border rounded text-textInput"
-                />
-                </div>
-
-                <div className="mb-4">
-                <label className="block mb-2 text-TextColor">Expiry Date (Optional)</label>
-                <input
-                    type="date"
-                    name="expiryDate"
-                    value={form.expiryDate}
-                    onChange={handleChange}
-                    className="w-full px-3 py-2 border rounded text-textInput"
-                />
-                </div>
-                {response.message && (
-                    <div
-                        className={`p-4 mb-4 rounded ${
-                            response.success ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
-                        }`}
+                    <button
+                        onClick={() => navigate("/")}
+                        className="flex items-center gap-2 bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg"
                     >
-                        {response.message}
-                    </div>
-                )}
-                <button
-                type="submit"
-                className="w-full bg-btnColor hover:bg-btnColorHover text-white py-2 px-4 rounded duration-75"
-                >
-                Add Offer
-                </button>
-            </form>
-
-            {/* Offers List */}
-            <div>
-                <h2 className="text-xl font-bold mb-4 text-TextColor">Offers</h2>
-                {offers.length === 0 ? (
-                <p className="text-TextColor ">No offers available.</p>
-                ) : (
-                <ul className="space-y-4">
-                    {offers.map((offer) => (
-                    <li
-                        key={offer.id}
-                        className="p-4 border rounded shadow flex justify-between items-center text-TextColor"
-                    >
-                        <div>
-                        <h3 className="text-lg font-bold">{offer.title}</h3>
-                        <p>{offer.description}</p>
-                        <p className=""> {offer.thirdPartyId}</p>
-                        {}
-                        {offer.image && (
-                            <img
-                            src={`http://localhost:3000${offer.imageUrl}`}
-                            alt="Offer"
-                            className="w-16 h-16 mt-2 rounded"
-                            />
-                        )}
-                        {offer.points && <p className="text-TextColor">Points: {offer.points}</p>}
-                        {offer.expiryDate && (
-                            <p className="text-TextColor">Expiry Date: {offer.expiryDate}</p>
-                        )}
-                        </div>
-                        <button
-                        onClick={() => handleDelete(offer._id)}
-                        className="py-3 px-4 bg-deleteColor rounded-lg duration-75 hover:bg-deleteColorHover"
-                        >
-                        Delete
-                        </button>
-                    </li>
-                    ))}
-                </ul>
-                )}
-            </div>
+                        <i className="pi pi-home"></i>
+                        Go to Home
+                    </button>
+                </div>
             </div>
         </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                {/* Add Offer Form */}
+                <div className="lg:col-span-1">
+                    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 sticky top-6">
+                        <h2 className="text-xl font-semibold text-gray-900 mb-6 flex items-center gap-2">
+                            <i className="pi pi-plus-circle text-primaryColor"></i>
+                            Create New Offer
+                        </h2>
+                        
+                        <form onSubmit={handleSubmit} className="space-y-4">
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Title <span className="text-red-500">*</span>
+                                </label>
+                                <div className="relative">
+                                    <i className="pi pi-tag absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                                    <input
+                                        type="text"
+                                        name="title"
+                                        value={form.title}
+                                        onChange={handleChange}
+                                        className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primaryColor focus:border-transparent transition-all duration-200"
+                                        placeholder="Enter offer title"
+                                        required
+                                    />
+                                </div>
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Description <span className="text-red-500">*</span>
+                                </label>
+                                <div className="relative">
+                                    <i className="pi pi-align-left absolute left-3 top-3 text-gray-400"></i>
+                                    <textarea
+                                        name="description"
+                                        value={form.description}
+                                        onChange={handleChange}
+                                        rows="4"
+                                        className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primaryColor focus:border-transparent transition-all duration-200 resize-none"
+                                        placeholder="Describe your offer..."
+                                        required
+                                    />
+                                </div>
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Vendor/Partner <span className="text-red-500">*</span>
+                                </label>
+                                <div className="relative">
+                                    <i className="pi pi-shop absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                                    <input
+                                        type="text"
+                                        name="thirdparty"
+                                        value={form.thirdparty}
+                                        onChange={handleChange}
+                                        className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primaryColor focus:border-transparent transition-all duration-200"
+                                        placeholder="Enter vendor name"
+                                        required
+                                    />
+                                </div>
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Offer Image
+                                </label>
+                                <div
+                                    className="w-full border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer hover:border-primaryColor transition-colors duration-200"
+                                    onDrop={handleImageDrop}
+                                    onDragOver={handleDragOver}
+                                >
+                                    <input
+                                        type="file"
+                                        accept="image/*"
+                                        onChange={handleImageUpload}
+                                        className="hidden"
+                                        id="imageInput"
+                                    />
+                                    <label htmlFor="imageInput" className="cursor-pointer">
+                                        <i className="pi pi-cloud-upload text-3xl text-gray-400 mb-2 block"></i>
+                                        <p className="text-gray-600">
+                                            {form.image ? form.image.name : "Click to upload or drag and drop"}
+                                        </p>
+                                        <p className="text-xs text-gray-400 mt-1">PNG, JPG up to 10MB</p>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Points Required
+                                </label>
+                                <div className="relative">
+                                    <i className="pi pi-star absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                                    <input
+                                        type="number"
+                                        name="points"
+                                        value={form.points}
+                                        onChange={handleChange}
+                                        className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primaryColor focus:border-transparent transition-all duration-200"
+                                        placeholder="Enter points required"
+                                        min="0"
+                                    />
+                                </div>
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Expiry Date
+                                </label>
+                                <div className="relative">
+                                    <i className="pi pi-calendar absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                                    <input
+                                        type="date"
+                                        name="expiryDate"
+                                        value={form.expiryDate}
+                                        onChange={handleChange}
+                                        className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primaryColor focus:border-transparent transition-all duration-200"
+                                    />
+                                </div>
+                            </div>
+
+                            {response.message && (
+                                <div
+                                    className={`p-4 rounded-lg ${
+                                        response.success 
+                                            ? "bg-green-50 border border-green-200 text-green-700" 
+                                            : "bg-red-50 border border-red-200 text-red-700"
+                                    }`}
+                                >
+                                    <div className="flex items-center gap-2">
+                                        <i className={`pi ${response.success ? 'pi-check-circle' : 'pi-exclamation-triangle'}`}></i>
+                                        {response.message}
+                                    </div>
+                                </div>
+                            )}
+
+                            <button
+                                type="submit"
+                                className="w-full bg-primaryColor hover:bg-green-600 text-white py-3 px-4 rounded-lg font-medium transition-all duration-200 transform hover:scale-[1.02] focus:scale-[1.02] shadow-lg hover:shadow-xl focus:ring-2 focus:ring-primaryColor focus:ring-offset-2"
+                            >
+                                <i className="pi pi-plus mr-2"></i>
+                                Create Offer
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                {/* Offers List */}
+                <div className="lg:col-span-2">
+                    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                        <h2 className="text-xl font-semibold text-gray-900 mb-6 flex items-center gap-2">
+                            <i className="pi pi-gift text-primaryColor"></i>
+                            Active Offers ({offers.length})
+                        </h2>
+
+                        {offers.length === 0 ? (
+                            <div className="text-center py-12">
+                                <i className="pi pi-gift text-4xl text-gray-300 mb-4 block"></i>
+                                <p className="text-gray-500 text-lg">No offers available</p>
+                                <p className="text-gray-400 text-sm">Create your first offer to get started</p>
+                            </div>
+                        ) : (
+                            <div className="grid grid-cols-1 gap-6">
+                                {offers.map((offer) => (
+                                    <div
+                                        key={offer.id}
+                                        className="border border-gray-200 rounded-lg p-6 hover:shadow-md transition-all duration-200"
+                                    >
+                                        <div className="flex flex-col sm:flex-row gap-4">
+                                            {/* Offer Image */}
+                                            <div className="flex-shrink-0">
+                                                {offer.imageUrl ? (
+                                                    <img
+                                                        src={`http://localhost:3000${offer.imageUrl}`}
+                                                        alt={offer.title}
+                                                        className="w-20 h-20 rounded-lg object-cover border border-gray-200"
+                                                    />
+                                                ) : (
+                                                    <div className="w-20 h-20 bg-gray-100 rounded-lg flex items-center justify-center">
+                                                        <i className="pi pi-image text-gray-400 text-2xl"></i>
+                                                    </div>
+                                                )}
+                                            </div>
+
+                                            {/* Offer Info */}
+                                            <div className="flex-grow">
+                                                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+                                                    <div>
+                                                        <h3 className="text-lg font-semibold text-gray-900 mb-2">{offer.title}</h3>
+                                                        <p className="text-gray-600 mb-3 leading-relaxed">{offer.description}</p>
+                                                        
+                                                        <div className="space-y-2 text-sm">
+                                                            <div className="flex items-center gap-2 text-gray-600">
+                                                                <i className="pi pi-shop text-gray-400"></i>
+                                                                <span className="font-medium">Vendor:</span>
+                                                                <span>{offer.thirdPartyId}</span>
+                                                            </div>
+                                                            
+                                                            {offer.points && (
+                                                                <div className="flex items-center gap-2 text-gray-600">
+                                                                    <i className="pi pi-star text-yellow-500"></i>
+                                                                    <span className="font-medium">Points Required:</span>
+                                                                    <span className="bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs font-medium">
+                                                                        {offer.points} points
+                                                                    </span>
+                                                                </div>
+                                                            )}
+                                                            
+                                                            {offer.expiryDate && (
+                                                                <div className="flex items-center gap-2 text-gray-600">
+                                                                    <i className="pi pi-calendar text-gray-400"></i>
+                                                                    <span className="font-medium">Expires:</span>
+                                                                    <span>{new Date(offer.expiryDate).toLocaleDateString()}</span>
+                                                                </div>
+                                                            )}
+                                                        </div>
+                                                    </div>
+
+                                                    {/* Actions */}
+                                                    <div className="flex gap-2">
+                                                        <button 
+                                                            onClick={() => handleDelete(offer._id)}
+                                                            className="flex items-center gap-1 bg-red-100 hover:bg-red-200 text-red-600 px-3 py-2 rounded-lg transition-all duration-200 font-medium text-sm"
+                                                        >
+                                                            <i className="pi pi-trash"></i>
+                                                            Delete
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                </div>
+            </div>
         </div>
+    </div>
 )
 }
 

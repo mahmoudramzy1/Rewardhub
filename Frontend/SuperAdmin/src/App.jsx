@@ -16,7 +16,7 @@ function App() {
 
   return (
       <>
-<div className="flex bg-white py-4 items-center justify-center font-[Roboto, sans-serif]">
+<div className="min-h-screen bg-white font-[Inter, sans-serif]">
       <ToastContainer />
 
       <BrowserRouter>
@@ -26,8 +26,12 @@ function App() {
             path="/dashboard"
             element={
               <ProtectedRoute>
-                <Toolbar />
-                <Dashboard />
+                <div className="min-h-screen">
+                  <Toolbar />
+                  <div className="pt-16">
+                    <Dashboard />
+                  </div>
+                </div>
               </ProtectedRoute>
             }
           />
@@ -35,9 +39,12 @@ function App() {
             path="/offerDashBoard"
             element={
               <ProtectedRoute>
-                <Toolbar />
-                {/* <Logo /> */}
-                <OffersDashboard />
+                <div className="min-h-screen">
+                  <Toolbar />
+                  <div className="pt-16">
+                    <OffersDashboard />
+                  </div>
+                </div>
               </ProtectedRoute>
             }
           />
@@ -45,8 +52,12 @@ function App() {
             path="/marketDashBoard"
             element={
               <ProtectedRoute>
-                <Toolbar />
-                <MarketDashboard />
+                <div className="min-h-screen">
+                  <Toolbar />
+                  <div className="pt-16">
+                    <MarketDashboard />
+                  </div>
+                </div>
               </ProtectedRoute>
             }
           />
@@ -54,8 +65,12 @@ function App() {
             path="/register"
             element={
               <ProtectedRoute>
-                <Toolbar />
-                <Register />
+                <div className="min-h-screen">
+                  <Toolbar />
+                  <div className="pt-16">
+                    <Register />
+                  </div>
+                </div>
               </ProtectedRoute>
             }
           />

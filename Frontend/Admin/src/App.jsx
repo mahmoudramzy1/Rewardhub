@@ -10,7 +10,7 @@ function App() {
 
   return (
     <>
-      <div className="flex bg-white h-lvh items-center justify-center font-[Roboto, sans-serif]">
+      <div className=" bg-white h-lvh items-center justify-center font-[Roboto, sans-serif]">
       <ToastContainer></ToastContainer>
         <BrowserRouter>
           <Routes>
