@@ -186,5 +186,5 @@ git commit -m "Add feature-name"
 
 ## 📌 App links
 
-- 🎥 [Demo Video](https://www.youtube.com/watch?v=ShUvM0AYVPI)
+- 🎥 [Demo Video](https://www.youtube.com/watch?v=nyc9gxkg56E)
 - 📊 [Presentation](https://docs.google.com/presentation/d/1G9HICe-cMydpujCcK2k9I3LErt6GkGJR/edit#slide=id.p1)
